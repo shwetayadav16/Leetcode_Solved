@@ -1,21 +1,16 @@
 class Solution {
 public:
-    int func(string s, int ind,vector<int>&memo){
-        if(ind == s.length()) return 1;
-
-        if(s[ind] == '0') return 0;
-
-        if (memo[ind] != -1) return memo[ind];
-
-        int ways = func(s, ind+1,memo);
-        if(ind+1 < s.size() && (s[ind] == '1' || (s[ind] == '2' && s[ind+1] <= '6'))){
-            ways += func(s, ind+2,memo);
-        }
-        return memo[ind] = ways;
-    }
     int numDecodings(string s) {
         int n=s.size();
-        vector<int>memo(n,-1);
-        return func(s, 0,memo);
+        vector<int>memo(n+1,-1);
+        memo[n]=1;
+        for(int i=n-1;i>=0;i--){
+            if(s[i]=='0') memo[i]=0;
+            else memo[i]=memo[i+1];
+            if(i+1 < s.size() && (s[i] == '1' || (s[i] == '2' && s[i+1] <= '6'))){
+                memo[i]=memo[i]+memo[i+2];
+            }
+        }
+        return memo[0];
     }
 };
