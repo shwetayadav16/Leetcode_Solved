@@ -10,17 +10,24 @@
  */
 class Solution {
 public:
-ListNode*swap(ListNode*head){
-    if(head==NULL||head->next==NULL) return head;
-    ListNode* next=head->next;
-    head->next=next->next;
-    next->next=head;
-    head=next;
-    next=next->next;
-    next->next=swap(next->next);
-    return head;
-}
     ListNode* swapPairs(ListNode* head) {
-        return swap(head);
+        if (!head || !head->next) return head; // Base case
+        
+        ListNode* newHead = head->next; // The second node becomes the new head
+        ListNode* prev = nullptr;
+        ListNode* curr = head;
+
+        while (curr && curr->next) {
+            ListNode* next = curr->next;
+            curr->next = next->next;
+            next->next = curr;
+            
+            if (prev) prev->next = next; // Connect previous pair with the current
+            
+            prev = curr;
+            curr = curr->next;
+        }
+
+        return newHead;
     }
 };
