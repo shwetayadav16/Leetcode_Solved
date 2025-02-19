@@ -28,7 +28,7 @@ public:
                 char leftChar = s[i];
                 i++;
                 if (mp.find(leftChar) != mp.end()) {
-                    if (mp[leftChar]>=0) {
+                    if (mp[leftChar]==0) {
                         matched--;
                     }
                     mp[leftChar]++;
