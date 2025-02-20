@@ -10,46 +10,22 @@
  */
 class Solution {
 public:
-    ListNode* mergeInBetween(ListNode* list1, int a, int b, ListNode* list2) {
-        // ListNode*temp=list1;
-        // ListNode* a_ptr=NULL;
-        // for(int i=0;i<a-1;i++){
-        //     temp=temp->next;
-        // }
-        // a_ptr=temp;
-
-        // temp=temp->next;
-        // for(int i=a;i<=b;i++){
-        //     temp=temp->next;
-        // }
-        // ListNode* b_ptr=temp;
-        // //a ko list2 ke starting se jod diya
-        // temp=list2;
-        // while(temp->next!=NULL){
-        //     temp=temp->next;
-        // }
-        // temp->next=b_ptr;
-
-        // return list1;
-        ListNode* prev = list1;
-
-        for(int i=0; i<a-1; i++){
-            prev = prev->next;
+    ListNode* mergeInBetween(ListNode* List1, int a, int b, ListNode* List2) {
+        ListNode*temp=List1;
+        for(int i=0;i<a-1;i++){
+            temp=temp->next;
         }
-
-        ListNode *curr = prev->next;
-        for(int i=a; i<=b; i++){
-            curr = curr->next;
+        ListNode* a_ptr=temp;
+        for(int i=a-1;i<b;i++){
+            temp=temp->next;
         }
-
-        ListNode *temp = list2;
-        while(temp->next != NULL){
-            temp = temp->next;
+        ListNode* b_ptr=temp;
+        temp=List2;
+        while(temp->next!=NULL){
+            temp=temp->next;
         }
-
-        prev->next = list2;
-        temp->next = curr;
-
-        return list1;
+        a_ptr->next=List2;
+        temp->next=b_ptr->next;
+        return List1;
     }
 };
