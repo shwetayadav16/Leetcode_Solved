@@ -12,20 +12,18 @@
  */
 class Solution {
 public:
-       bool isbalanced = true;
-    int Height(TreeNode* root){
-        if(root == NULL) return 0;
-
-        int lh = Height(root -> left);
-        int rh = Height(root -> right);
-        // check for current noe, is it balanced?
-        if(isbalanced && abs(lh - rh) > 1){
-            isbalanced = false; 
-        } 
-        return max(lh, rh) + 1;
-    }
+int depth(TreeNode*root){
+    if(root==NULL) return 0;
+    int left=depth(root->left);
+    int right=depth(root->right);
+    return 1+max(left,right);
+}
     bool isBalanced(TreeNode* root) {
-        Height(root);  
-       return isbalanced;
+        if (root == NULL)
+            return true;
+        bool left = isBalanced(root->left);
+        bool right =isBalanced(root->right);
+        bool diff=abs(depth(root->left)-depth(root->right))<=1;
+        return left&&right&&diff;
     }
 };
