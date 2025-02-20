@@ -8,7 +8,7 @@ queue<int>q2;
     
     void push(int x) {
         q2.push(x);
-         while(!q1.empty()){
+         while(q1.size()>0){
             q2.push(q1.front());
             q1.pop();
         }
