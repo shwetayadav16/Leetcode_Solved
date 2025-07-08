@@ -2,14 +2,13 @@ class Solution {
 public:
     int missingNumber(vector<int>& nums) {
         int n=nums.size();
-        vector<int>hash(n+1,0);
-        
+        int cal_xor=0;
+        int act_xor=0;
         for(int i=0;i<n;i++){
-            hash[nums[i]]++;
+            act_xor=act_xor^nums[i];
+            cal_xor=cal_xor^i;
         }
-        for(int i=0;i<n+1;i++){
-            if(hash[i]==0) return i;
-        }
-        return -1;
+        cal_xor=cal_xor^n;
+        return act_xor^cal_xor;
     }
 };
