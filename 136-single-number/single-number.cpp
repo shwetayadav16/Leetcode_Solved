@@ -1,11 +1,10 @@
 class Solution {
 public:
     int singleNumber(vector<int>& nums) {
-        int n=nums.size();
-        sort(nums.begin(),nums.end());
-        for(int i=0;i<nums.size();i=i+2){
-           if(i==n-1||nums[i]!=nums[i+1]) return nums[i];
+        int xor_val=0;
+        for(int i:nums){
+            xor_val=xor_val^i;
         }
-        return 0;
+        return xor_val;
     }
 };
