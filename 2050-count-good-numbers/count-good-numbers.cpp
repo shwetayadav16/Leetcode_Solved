@@ -1,21 +1,18 @@
-
-#define mod 1000000007
 class Solution {
-public:
-long long power(long long x, long long n) {
-        long long res = 1;
-        while (n > 0) {
-            if (n % 2 == 1) { // If n is odd
-                res = (res * x) % mod;
-            }
-            x = (x * x) % mod;
-            n /= 2;
-        }
-        return res;
+    const int mod = 1e9 + 7;
+
+    long long power(long long x, long long n) {
+        if (n == 0) return 1;
+        long long half = power(x, n / 2);
+        long long result = (half * half) % mod;
+        if (n % 2 == 1)
+            result = (result * x) % mod;
+        return result;
     }
+public:
     int countGoodNumbers(long long n) {
-        long long no_of_odd_idx=n/2;
-        long long no_of_even_idx=n/2+n%2;
-        return (power(5,no_of_even_idx)*power(4,no_of_odd_idx))%mod;
+        long long odd=(n/2);
+        long long even = (n+1)/2;
+        return (power(5,even)*power(4,odd))%mod;
     }
 };
