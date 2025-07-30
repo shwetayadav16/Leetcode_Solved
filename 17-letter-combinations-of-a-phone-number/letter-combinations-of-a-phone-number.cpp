@@ -2,7 +2,7 @@ class Solution {
 public:
 
 void backtrack(int index,string digits,string &curr_string,unordered_map<char,string>&phonemap,vector<string>&result){
-    if(index==digits.size()){
+    if(curr_string.size()==digits.size()){
         result.push_back(curr_string);
         return ;
     }
