@@ -3,13 +3,17 @@ public:
     bool isSubsequence(string s, string t) {
         int i=0;
         int j=0;
-        if(s.size()>t.size()) return false;
-        while(i<s.size()&&j<t.size()){
+        while(i<s.length()&&j<t.size()){
             if(s[i]==t[j]){
                 i++;
+                j++;
+            }else{
+                j++;
             }
-            j++;
         }
-    return i==s.length();
+        if(i==s.length()){
+            return true;
+        }
+        return false;
     }
 };
