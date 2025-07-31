@@ -1,17 +1,18 @@
 class Solution {
 public:
+int robbing(vector<int>&nums,int i,vector<int>&dp){
+    if(i>=nums.size()){
+        return 0;
+    }
+    if(dp[i]!=-1){
+        return dp[i];
+    }
+    int take=nums[i]+robbing(nums,i+2,dp);
+    int skip=robbing(nums,i+1,dp);
+    return dp[i]=max(take,skip);
+}
     int rob(vector<int>& nums) {
-        int n=nums.size();
-        if (n == 0) return 0; // Edge case: No house to rob
-        if (n == 1) return nums[0]; // Edge case: Only one house
-        int prev1=nums[0];
-        int prev2=max(nums[0],nums[1]);
-        int curr=0;
-        for(int i=2;i<n;i++){
-            curr=max(nums[i]+prev1,prev2);
-            prev1=prev2;
-            prev2=curr;
-        }
-        return prev2;
+        vector<int>dp(nums.size(),-1);
+        return robbing(nums,0,dp);
     }
 };
