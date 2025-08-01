@@ -1,21 +1,16 @@
 class Solution {
 public:
-    // Boyre Moore Approach
     int majorityElement(vector<int>& nums) {
-        int n = nums.size();
-        int candidate = nums[0];
-        int count = 1;
-        for (int i = 1; i < n; i++) {
-            if (nums[i] == candidate) {
-                count++;
-            } else {
-                count--;
-            }
-            if (count == 0) {
-                candidate = nums[i];
-                count=1;
-            }
+        //brute force
+        int n=nums.size();
+        unordered_map<int,int>mp;
+        for(int i=0;i<n;i++){
+            mp[nums[i]]++;
         }
-        return candidate;
+        for(auto i:mp){
+            if(i.second>n/2)
+            return i.first;
+        }
+        return -1;
     }
 };
