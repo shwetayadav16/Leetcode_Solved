@@ -1,30 +1,24 @@
 class Solution {
 public:
-    vector<vector<string>> groupAnagrams(vector<string>& strs) {
-        unordered_map<string, vector<string>> map;
-
-        for (string str : strs) {
-            vector<int> count(26, 0); // Frequency array for 'a' to 'z'
-
-            for (char c : str) {
-                count[c - 'a']++; // Count frequency
+    vector<vector<string>> groupAnagrams(vector<string>& arr) {
+        map<string,vector<string>>mp;
+        vector<vector<string>>ans;
+        for(auto a:arr){
+            string key=a;
+            sort(key.begin(),key.end());
+            if(mp.find(key)==mp.end()){
+                vector<string>v;
+                v.push_back(a);
+                mp[key]=v;
             }
-
-            // Convert frequency array to a unique string key
-            string key = "";
-            for (int num : count) {
-                key += to_string(num) + "#"; // Example: "1#0#2#..."
+            else{
+                mp[key].push_back(a);
             }
-
-            // Group words by key
-            map[key].push_back(str);
         }
-
-        vector<vector<string>> result;
-        for (auto& pair : map) {
-            result.push_back(pair.second);
+        for(auto i:mp){
+            vector<string>v=i.second;
+            ans.push_back(v);
         }
-
-        return result;
+        return ans;
     }
 };
