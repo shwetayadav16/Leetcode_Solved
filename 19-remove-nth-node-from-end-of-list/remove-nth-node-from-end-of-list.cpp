@@ -1,4 +1,3 @@
-
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -12,26 +11,21 @@
 class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
-        if(head==NULL) return NULL;
-        ListNode*temp=head;
-        int count=0;
-        
-        while(temp!=NULL){
-            count++;
-            temp=temp->next;
-        }
-        if (n == count) {
-            ListNode* newHead = head->next;
-            delete head;
-            return newHead;
-        }
-        temp=head;
-        for(int i=0;i<count-n-1;i++){
-            temp=temp->next;
-        }
-        ListNode*to_delete=temp->next;
-        temp->next=temp->next->next;
-        delete to_delete;
-        return head;
+       //brute force using i know --> linkedlist size - n
+       //optimal using slow fast pointer;
+       ListNode*fast=head;
+       ListNode*slow=head;
+       for(int i=0;i<n;i++){
+        fast=fast->next;
+       }
+       if(fast==NULL) return head->next;
+       while(fast->next!=NULL){
+        fast=fast->next;
+        slow=slow->next;
+       }
+       ListNode*delNode=slow->next;
+       slow->next=slow->next->next;
+       delete delNode;
+       return head;
     }
 };
