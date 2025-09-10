@@ -11,7 +11,7 @@
 class Solution {
 public:
 ListNode*reverseLL(ListNode*node){
-    if(node==NULL||node->next==NULL) return node;
+    // if(node==NULL||node->next==NULL) return node;
     ListNode*curr=node;
     ListNode*prev=NULL;
     ListNode*temp;
