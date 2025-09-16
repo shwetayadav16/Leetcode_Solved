@@ -10,40 +10,29 @@
  */
 class Solution {
 public:
+
+//when a naive coder write the code--i write this comment because after 5 year when i am ceo of company 
+//and when remembering this comment and when i open this i feel the pain of writing code as noob
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        int carry=0;
-        ListNode*temp1=l1;
-        ListNode*temp2=l2;
-        ListNode*dummy=new ListNode(0);
-        ListNode*temp3=dummy;
-        while(temp1!=NULL&&temp2!=NULL){
-            int sum=temp1->val+temp2->val+carry;
-            carry=sum/10;
-            temp3->next= new ListNode(sum%10);
-            temp3=temp3->next;
+       ListNode* dummy = new ListNode(0); // dummy node
+        ListNode* curr = dummy; 
+        int carry = 0;
 
-            temp1=temp1->next;
-            temp2=temp2->next;
+        while (l1 != nullptr || l2 != nullptr || carry != 0) {
+            int sum = carry;
+            if (l1 != nullptr) {
+                sum += l1->val;
+                l1 = l1->next;
+            }
+            if (l2 != nullptr) {
+                sum += l2->val;
+                l2 = l2->next;
+            }
+            carry = sum / 10;
+            curr->next = new ListNode(sum % 10);
+            curr = curr->next;
         }
-        while(temp1!=NULL){
-            int sum=temp1->val+carry;
-            carry=sum/10;
-            temp3->next= new ListNode(sum%10);
-            temp3=temp3->next;
 
-            temp1=temp1->next;
-        }
-        while(temp2!=NULL){
-            int sum=temp2->val+carry;
-            carry=sum/10;
-            temp3->next= new ListNode(sum%10);
-            temp3=temp3->next;
-
-            temp2=temp2->next;
-        }
-        if(carry>0){
-            temp3->next=new ListNode(carry);
-        }
-        return dummy->next;
+        return dummy->next; // skip dummy node
     }
 };
