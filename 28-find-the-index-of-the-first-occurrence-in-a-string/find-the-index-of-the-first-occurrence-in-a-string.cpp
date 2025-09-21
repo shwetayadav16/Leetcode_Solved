@@ -1,14 +1,14 @@
 class Solution {
 public:
+//brute force: two pointer
+//optimal: using substr
     int strStr(string haystack, string needle) {
-        int n=haystack.size();
-        int len=needle.size();
+        int n=haystack.length();
+        int m=needle.length();
         for(int i=0;i<n;i++){
-           string check= haystack.substr(i,len);
-           if(check==needle){
-           return i;
-           break;
-           }
+            if(needle==haystack.substr(i,m)){
+                return i;
+            }
         }
         return -1;
     }
