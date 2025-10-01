@@ -1,18 +1,22 @@
 class Solution {
-    const int mod = 1e9 + 7;
-
-    long long power(long long x, long long n) {
-        if (n == 0) return 1;
-        long long half = power(x, n / 2);
-        long long result = (half * half) % mod;
-        if (n % 2 == 1)
-            result = (result * x) % mod;
-        return result;
-    }
 public:
+long long mod =1000000007;
+long long power(long long n, long long x){
+    n=n%mod;
+    long long ans=1;
+    while(x>0){
+        if(x%2==1){
+            ans=(ans*n)%mod;
+        }
+        x=x/2;
+        n=(n*n)%mod;
+    }
+    return ans;
+}
+
     int countGoodNumbers(long long n) {
-        long long odd=(n/2);
-        long long even = (n+1)/2;
+        long long odd=n/2;
+        long long even=(n+1)/2;
         return (power(5,even)*power(4,odd))%mod;
     }
 };
