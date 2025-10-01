@@ -1,17 +1,16 @@
 class Solution {
 public:
     int lengthOfLastWord(string s) {
-        int n=s.size();
-        int end=n-1;
-        //find the first char where which is not equal to space=' '
-        while(end>=0&&s[end]==' '){
-            end--;
+        int n = s.size(), length = 0;
+
+        for(int i=n-1;i>=0;i--){
+
+            if(length>0 && s[i] == ' ')break;
+
+            if(s[i] != ' ')length++;
+
         }
-        //Now,you have find the substring from start
-        int start=end;
-        while(start>=0&&s[start]!=' '){
-            start--;
-        }
-        return end-start;
+
+        return length;
     }
 };
