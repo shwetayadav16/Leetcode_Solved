@@ -1,36 +1,27 @@
 class Solution {
 public:
+//brute force
+bool isPal(string &s,int i,int j){//start=i and j=end
+    while(i<j){
+        if(s[i]!=s[j])
+        return false;
+        i++;
+        j--;
+    }
+    return true;
+}
     string longestPalindrome(string s) {
-        int ans = 0, n = s.size();
-        string st = "";
-
-        for (int i = 0; i < n; i++) {
-            // Odd length palindrome (single center character)
-            int l = i, r = i;
-            while (l >= 0 && r < n && s[l] == s[r]) {
-                int len = r - l + 1;
-                if (len > ans) {
-                    ans = len;
-                    st = s.substr(l, len);
+        int n=s.size();
+        int start;
+        int longpal=INT_MIN;
+        for(int i=0;i<n;i++){
+            for(int j=i;j<n;j++){
+                if(isPal(s,i,j)&&(j-i+1)>longpal){
+                    start=i;
+                    longpal=j-i+1;
                 }
-                l--; // Expand left
-                r++; // Expand right
-            }
-
-            // Even length palindrome (two center characters)
-            l = i;
-            r = i + 1;
-            while (l >= 0 && r < n && s[l] == s[r]) {
-                int len = r - l + 1;
-                if (len > ans) {
-                    ans = len;
-                    st = s.substr(l, len);
-                }
-                l--; // Expand left
-                r++; // Expand right
             }
         }
-
-        return st;
+        return s.substr(start,longpal);
     }
 };
