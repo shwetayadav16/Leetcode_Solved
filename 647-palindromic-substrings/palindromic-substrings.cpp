@@ -1,5 +1,6 @@
 class Solution {
 public:
+//Blueprint appproach solution
     int countSubstrings(string s) {
         int n=s.size();
         int count=0;
@@ -10,8 +11,8 @@ public:
                 if(i==j){
                     dp[i][i]=true;
                 }
-                else if(j == i + 1){
-                    dp[i][j]=s[i]==s[j];
+                else if(j == i + 1){//yaha par hui thi mistake
+                    dp[i][j]=s[i]==s[j];//yaha par hui thi mistake
                 }
                 else{
                     dp[i][j]=(s[i]==s[j]&&dp[i+1][j-1]);
