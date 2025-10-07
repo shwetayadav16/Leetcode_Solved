@@ -1,5 +1,6 @@
 class Solution {
 public:
+//itearative approach
 bool isPal(string &s,int i,int j){
     while(i<j){
         if(s[i]!=s[j])
