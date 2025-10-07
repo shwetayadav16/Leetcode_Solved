@@ -1,23 +1,20 @@
 class Solution {
 public:
-//Blueprint appproach solution
+bool isPal(string &s,int i,int j){
+    while(i<j){
+        if(s[i]!=s[j])
+        return false;
+        i++;
+        j--;
+    }
+    return true;
+}
     int countSubstrings(string s) {
         int n=s.size();
         int count=0;
-        vector<vector<bool>>dp(n,vector<bool>(n,false));
-        for(int L=1;L<=n;L++){
-            for(int i=0;i+L-1<n;i++){
-                int j=i+L-1;
-                if(i==j){
-                    dp[i][i]=true;
-                }
-                else if(j == i + 1){//yaha par hui thi mistake
-                    dp[i][j]=s[i]==s[j];//yaha par hui thi mistake
-                }
-                else{
-                    dp[i][j]=(s[i]==s[j]&&dp[i+1][j-1]);
-                }
-                if(dp[i][j]==true){
+        for(int i=0;i<n;i++){
+            for(int j=i;j<n;j++){
+                if(isPal(s,i,j)){
                     count++;
                 }
             }
