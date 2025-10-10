@@ -1,27 +1,27 @@
 class Solution {
 public:
-//brute force
-bool isPal(string &s,int i,int j){//start=i and j=end
-    while(i<j){
-        if(s[i]!=s[j])
-        return false;
-        i++;
-        j--;
+void expand(string &s,int &maxLen,int &start,int left,int right){
+    while(left>=0 && right<s.size() && s[left]==s[right]){
+        //because we assumed that it is center then we expand our pointer
+        left--;
+        right++;
     }
-    return true;
+    int len=right-left-1;//here, -1 to maintain diff because it left become negative and right become one more postive then 2 length aur bandh gayi but thta is not true length so we subtract 1
+    
+    //now to maintain the maxlen and start pointer
+    if(len>maxLen){
+        maxLen=len;
+        start=left+1;
+    }
 }
     string longestPalindrome(string s) {
         int n=s.size();
-        int start;
-        int longpal=INT_MIN;
+        int maxLen=0;
+        int start=0;
         for(int i=0;i<n;i++){
-            for(int j=i;j<n;j++){
-                if(isPal(s,i,j)&&(j-i+1)>longpal){
-                    start=i;
-                    longpal=j-i+1;
-                }
-            }
+            expand(s,maxLen,start,i,i);//to check odd palindrome substring
+            expand(s,maxLen,start,i,i+1);//to check even palindrome substring
         }
-        return s.substr(start,longpal);
+        return s.substr(start,maxLen);
     }
 };
