@@ -11,6 +11,7 @@ public:
             if(!isalnum(s[i])){
                 i++;
                 continue;
+                //continue is necessary because nahi toh age ke case chal jayege aur match nahi toh age badh jayega jaise---abb,,a--do baar while mein i++ hoga
             }
             if(!isalnum(s[j])){
                 j--;
