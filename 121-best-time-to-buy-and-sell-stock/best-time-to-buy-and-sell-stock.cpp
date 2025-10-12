@@ -1,13 +1,19 @@
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
-        int max_pro=0;
-        int min_price=INT_MAX;
-        for(int i=0;i<prices.size();i++){
-            if(prices[i]<min_price) min_price=prices[i];
-            else if(prices[i]>min_price) 
-            max_pro=max((prices[i]-min_price),max_pro);
+        int n = prices.size();
+        if (n < 2) return 0;
+
+        int maxCurrent = 0;
+        int maxSoFar = 0;
+
+        for (int i = 1; i < n; i++) {
+            int diff = prices[i] - prices[i - 1];  // daily change
+            maxCurrent = max(0, maxCurrent + diff);
+//waise hi hai jaise sum karte jao aur aur jab negative mile toh 0 karke phir se maximum find karte jao
+            maxSoFar = max(maxSoFar, maxCurrent);
         }
-        return max_pro;
+
+        return maxSoFar;
     }
 };
