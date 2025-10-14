@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<string> removeAnagrams(vector<string>& words) {
-        vector<string> result;
+       vector<string> result;
     string prevKey = "";
 
     for (string word : words) {
