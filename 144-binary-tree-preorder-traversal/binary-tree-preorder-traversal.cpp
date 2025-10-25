@@ -11,15 +11,23 @@
  */
 class Solution {
 public:
-void solve(TreeNode*root,vector<int>&ans){
-    if(root==NULL) return;
-    ans.push_back(root->val);
-    solve(root->left,ans);
-    solve(root->right,ans);
-}
     vector<int> preorderTraversal(TreeNode*root) {
-        vector<int>ans;
-        solve(root,ans);
-        return ans;
+        vector<int> ans;
+    stack<TreeNode*> st;
+    TreeNode* curr = root;
+
+    while (curr != NULL || !st.empty()) {
+        while (curr != NULL) {
+            ans.push_back(curr->val);  // Visit the node
+            st.push(curr);             // Store it for backtracking
+            curr = curr->left;         // Go to left child
+        }
+        curr = st.top();
+        st.pop();
+        curr = curr->right;            // Move to right subtree
+    }
+
+    return ans;
+
     }
 };
