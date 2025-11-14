@@ -8,20 +8,20 @@
  */
 class Solution {
 public:
-//conditions:
-//when they have no intersection point
-//they have --2 case--a. same length b. diff length
-//when starting point is intersection means headA=headB
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        ListNode*tempA=headA;
-        ListNode*tempB=headB;
-        while(tempA!=tempB){
-            tempA=tempA->next;
-            tempB=tempB->next;
-            if(tempA==tempB) return tempA;//any Node or NULL--this is true
-            if(tempA==NULL) tempA=headB;
-            if(tempB==NULL) tempB=headA;
+        unordered_set<ListNode*>st;
+        ListNode*temp1=headA;
+        while(temp1!=NULL){
+            st.insert(temp1);
+            temp1=temp1->next;
         }
-        return tempA;
+        ListNode*temp2=headB;
+        while(temp2!=NULL){
+            if(st.find(temp2)!=st.end()){
+                return temp2;
+            }
+            temp2=temp2->next;
+        }
+        return NULL;
     }
 };
