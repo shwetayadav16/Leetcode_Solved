@@ -9,7 +9,7 @@ public:
                 break;
             }
         }
-        if(j==-1) return;
+        if(j==-1) return;//no zeroes in array
         for(int i=j+1;i<n;i++){
             if(nums[i]!=0){
                 swap(nums[i],nums[j]);
