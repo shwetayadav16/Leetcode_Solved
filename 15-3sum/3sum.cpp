@@ -1,31 +1,33 @@
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
-        int n=nums.size();
-        sort(nums.begin(),nums.end());
-        vector<vector<int>>ans;
-        for(int i=0;i<n-2;i++){
-            if(i>0&&nums[i]==nums[i-1]){
-                continue;
-            }
-            int p=i+1;
-            int q=n-1;
-            while(p<q){
-                int sum=nums[i]+nums[p]+nums[q];
-                if(sum==0){
-                    ans.push_back({nums[i],nums[p],nums[q]});
-                    // Avoid duplicate triplets
-                    while (p < q && nums[p] == nums[p + 1]) p++;
-                    while (p < q && nums[q] == nums[q - 1]) q--;
-                    
-                    p++;
-                    q--;
+         vector<vector<int>> ans;
+        int n = nums.size();
+        sort(nums.begin(), nums.end());
+
+        for (int i = 0; i < n; i++) {
+            // Skip duplicate fixed elements
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+
+            int left = i + 1, right = n - 1;
+
+            while (left < right) {
+                long sum = (long)nums[i] + nums[left] + nums[right];
+
+                if (sum == 0) {
+                    ans.push_back({nums[i], nums[left], nums[right]});
+                    left++;
+                    right--;
+
+                    // Skip duplicate left & right
+                    while (left < right && nums[left] == nums[left - 1]) left++;
+                    while (left < right && nums[right] == nums[right + 1]) right--;
                 }
-                else if(sum<0){
-                    p++;
+                else if (sum < 0) {
+                    left++;
                 }
-                else{
-                    q--;
+                else {
+                    right--;
                 }
             }
         }
